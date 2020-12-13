@@ -1,7 +1,6 @@
 package com.doctory_doctor.models;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.Patterns;
 import android.widget.Toast;
 
@@ -13,8 +12,6 @@ import com.doctory_doctor.BR;
 import com.doctory_doctor.R;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SignUpModel extends BaseObservable implements Serializable {
     private String imageUrl;
@@ -29,7 +26,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
     private int city_id;
     private String price;
     private String licenseImage;
-    private int degree_id;
+    private String degree;
     private String email;
     private String password;
 
@@ -38,6 +35,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
     public ObservableField<String> error_price = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
     public ObservableField<String> error_password = new ObservableField<>();
+    public ObservableField<String> error_degree= new ObservableField<>();
 
 
     public SignUpModel(String phone_code, String phone) {
@@ -49,11 +47,11 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.address = "";
         this.lat=0.0;
         this.lng = 0.0;
-        this.specialization_id = 1;
-        this.city_id = 1;
+        this.specialization_id = 0;
+        this.city_id = 0;
         this.price ="";
         this.licenseImage ="";
-        this.degree_id =1;
+        this.degree ="";
         this.email = "";
         this.password ="";
 
@@ -89,12 +87,13 @@ public class SignUpModel extends BaseObservable implements Serializable {
     {
         if (specialization_id!=0&&
                 city_id!=0&&
-                !price.isEmpty()&&
                 !licenseImage.isEmpty()&&
-                degree_id!=0
+                !degree.isEmpty()
         )
         {
             error_price.set(null);
+            error_degree.set(null);
+
             return true;
         }else {
             if (specialization_id==0){
@@ -105,14 +104,15 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 Toast.makeText(context, R.string.ch_city, Toast.LENGTH_SHORT).show();
             }
 
-            if (price.isEmpty()){
-                error_price.set(context.getString(R.string.field_req));
-            }else {
-                error_price.set(null);
-            }
 
-            if (degree_id==0){
-                Toast.makeText(context, R.string.ch_degree, Toast.LENGTH_SHORT).show();
+
+            if (degree.isEmpty()){
+                error_degree.set(context.getString(R.string.field_req));
+
+            }
+            else {
+                error_degree.set(null);
+
             }
 
             if (licenseImage.isEmpty()){
@@ -253,12 +253,12 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.licenseImage = licenseImage;
     }
 
-    public int getDegree_id() {
-        return degree_id;
+    public String getDegree() {
+        return degree;
     }
 
-    public void setDegree_id(int degree_id) {
-        this.degree_id = degree_id;
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
 
     @Bindable

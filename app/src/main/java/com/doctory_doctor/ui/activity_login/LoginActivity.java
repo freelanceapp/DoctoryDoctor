@@ -15,6 +15,7 @@ import com.doctory_doctor.language.Language;
 import com.doctory_doctor.models.LoginModel;
 import com.doctory_doctor.mvp.activity_login_presenter.ActivityLoginPresenter;
 import com.doctory_doctor.mvp.activity_login_presenter.ActivityLoginView;
+import com.doctory_doctor.ui.activity_confirm_code.ConfirmCodeActivity;
 import com.doctory_doctor.ui.activity_home.HomeActivity;
 import com.doctory_doctor.ui.activity_phone.PhoneActivity;
 import com.doctory_doctor.ui.activity_sign_up.SignUpActivity;
@@ -58,7 +59,10 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
 
     @Override
     public void onLoginValid() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
+        intent.putExtra("phone_code",model.getPhone_code());
+        intent.putExtra("phone",model.getPhone());
+
         startActivity(intent);
         finish();
 

@@ -20,4 +20,5 @@ public class ActivityLoginPresenter {
             view.onLoginValid();
         }
     }
+
 }
