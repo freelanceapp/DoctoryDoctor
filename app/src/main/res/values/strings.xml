@@ -138,5 +138,6 @@
     <string name="verification_code"><![CDATA[Verification <font color="#F61C00">Code</font>]]></string>
     <string name="search_by_patient_name">Search by patient name</string>
     <string name="degree">Degree</string>
+    <string name="phone_found">Phone Found</string>
 
 </resources>

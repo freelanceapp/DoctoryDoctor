@@ -266,6 +266,11 @@ public class ActivitySignUpPresenter {
                             if (response.code() == 500) {
                                 view.onServer();
                             } else {
+                                 if (response.code() == 409) {
+                                    view.onFailed(context.getString(R.string.phone_found));
+                                }  else {
+                                    view.onFailed(response.message() + "");
+                                }
                                 view.onFailed(context.getResources().getString(R.string.failed));
                                 //  Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }

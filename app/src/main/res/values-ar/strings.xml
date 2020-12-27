@@ -137,6 +137,7 @@
     <string name="verification_phone"><![CDATA[التحقق من <font color="#F61C00">رقم الهاتف</font>]]></string>
     <string name="verification_code"><![CDATA[كود <font color="#F61C00">التحقق</font>]]></string>
     <string name="search_by_patient_name">إسم المريض</string>
-    <string name="degree">Degree</string>
+    <string name="degree">الدرجه</string>
+    <string name="phone_found">التليفون موجود</string>
 
 </resources>

@@ -26,18 +26,19 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
     private ActivityLoginBinding binding;
     private LoginModel model;
     private ActivityLoginPresenter presenter;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase,Paper.book().read("lang","ar")));
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         initView();
     }
-
 
 
     private void initView() {
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
         binding.tv1.setText(Html.fromHtml(getString(R.string.login2)));
         binding.tvSignUp.setText(Html.fromHtml(getString(R.string.donot_have_account)));
         binding.setModel(model);
-        presenter = new ActivityLoginPresenter(this,this);
+        presenter = new ActivityLoginPresenter(this, this);
         binding.btnLogin.setOnClickListener(view -> {
             presenter.checkData(model);
         });
@@ -60,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
     @Override
     public void onLoginValid() {
         Intent intent = new Intent(this, SignUpActivity.class);
-        intent.putExtra("phone_code",model.getPhone_code());
-        intent.putExtra("phone",model.getPhone());
+        intent.putExtra("phone_code", model.getPhone_code());
+        intent.putExtra("phone", model.getPhone());
 
         startActivity(intent);
         finish();
