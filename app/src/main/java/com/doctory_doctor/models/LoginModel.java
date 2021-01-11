@@ -25,10 +25,10 @@ public class LoginModel extends BaseObservable implements Serializable {
     }
 
     public boolean isDataValid(Context context){
-        if (!phone.isEmpty()){
-//        &&!password.isEmpty()&&password.length()>=6){
-//            error_phone.set(null);
-//            error_password.set(null);
+        if (!phone.isEmpty()
+        &&!password.isEmpty()&&password.length()>=6){
+            error_phone.set(null);
+            error_password.set(null);
             return true;
         }else {
 
@@ -40,13 +40,13 @@ public class LoginModel extends BaseObservable implements Serializable {
 
             }
 
-//            if (password.isEmpty()){
-//                error_password.set(context.getString(R.string.field_req));
-//            }else if (password.length()<6){
-//                error_password.set(context.getString(R.string.password_short));
-//            }else {
-//                error_password.set(null);
-//            }
+            if (password.isEmpty()){
+                error_password.set(context.getString(R.string.field_req));
+            }else if (password.length()<6){
+                error_password.set(context.getString(R.string.password_short));
+            }else {
+                error_password.set(null);
+            }
             return false;
         }
     }

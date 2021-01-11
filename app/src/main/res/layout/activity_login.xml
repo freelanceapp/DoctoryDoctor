@@ -136,7 +136,6 @@
                 android:layout_marginEnd="30dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="25dp"
-                android:visibility="gone"
 
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"

@@ -59,7 +59,7 @@ public class ActivityHomePresenter {
     }
     private void displayFragmentLive(){
         if (fragment_live ==null){
-            fragment_live = Fragment_Live.newInstance(lat,lng);
+            fragment_live = Fragment_Live.newInstance();
         }
 
         if (fragment_appointment!=null&&fragment_appointment.isAdded()){
@@ -142,7 +142,7 @@ public class ActivityHomePresenter {
 
     private void displayFragmentPatient(){
         if (fragment_patient ==null){
-            fragment_patient = Fragment_Patient.newInstance();
+            fragment_patient = Fragment_Patient.newInstance(lat,lng);
         }
 
         if (fragment_live !=null&& fragment_live.isAdded()){

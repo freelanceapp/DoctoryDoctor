@@ -3,34 +3,40 @@ package com.doctory_doctor.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.doctory_doctor.R;
 import com.doctory_doctor.databinding.AppointmentRowBinding;
 import com.doctory_doctor.databinding.LoadMoreRowBinding;
+import com.doctory_doctor.models.ApointmentModel;
+import com.doctory_doctor.ui.activity_home.fragments.Fragment_Appointment;
+import com.doctory_doctor.ui.activity_home.fragments.Fragment_Live;
 
 import java.util.List;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int DATA = 1;
     private final int LOAD = 2;
-    private List<Object> list;
+    private List<ApointmentModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
     private AppCompatActivity activity;
+    private Fragment fragment;
 
-    public AppointmentAdapter(List<Object> list, Context context) {
+    public AppointmentAdapter(List<ApointmentModel.Data> list, Context context, Fragment fragment) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
         activity = (AppCompatActivity) context;
-
+        this.fragment = fragment;
 
     }
 
@@ -39,10 +45,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType==DATA){
+        if (viewType == DATA) {
             AppointmentRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.appointment_row, parent, false);
             return new MyHolder(binding);
-        }else {
+        } else {
             LoadMoreRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more_row, parent, false);
             return new LoadMoreHolder(binding);
         }
@@ -52,16 +58,38 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MyHolder){
+        if (holder instanceof MyHolder) {
             MyHolder myHolder = (MyHolder) holder;
-
-
-            myHolder.binding.btnDetails.setOnClickListener(v -> {
-
+            myHolder.binding.setModel(list.get(position));
+           // Log.e("flkfkfk", list.get(position).getPatient_fk().getAppointment_time());
+//            myHolder.binding.image.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if(fragment instanceof  Fragment_Home){
+//                        Fragment_Home fragment_home=(Fragment_Home)fragment;
+//                        fragment_home.open(list.get(position));
+//                    }
+//                }
+//            });
+//            myHolder.binding.btnDetails.setOnClickListener(v -> {
+//
+//            });
+            myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (fragment instanceof Fragment_Appointment){
+                        Fragment_Appointment fragment_home=(Fragment_Appointment)fragment;
+                        fragment_home.setitem(list.get(position).getPatient_fk(),list.get(position).getId(),list.get(position).getReservation_type());
+                    }
+                    else    if (fragment instanceof Fragment_Live){
+                        Fragment_Live fragment_home=(Fragment_Live)fragment;
+                        fragment_home.setitem(list.get(position).getPatient_fk(),list.get(position).getId(),list.get(position).getReservation_type());
+                    }
+                }
             });
-        }else if (holder instanceof LoadMoreHolder){
+        } else if (holder instanceof LoadMoreHolder) {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
-            loadMoreHolder.binding.prgBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            loadMoreHolder.binding.prgBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             loadMoreHolder.binding.prgBar.setIndeterminate(true);
         }
 
@@ -69,7 +97,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return 8;
+        return list.size();
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
@@ -98,13 +126,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (list.size()>0){
-            if (list.get(position)==null){
+        if (list.size() > 0) {
+            if (list.get(position) == null) {
                 return LOAD;
-            }else {
+            } else {
                 return DATA;
             }
-        }else {
+        } else {
             return DATA;
 
         }
