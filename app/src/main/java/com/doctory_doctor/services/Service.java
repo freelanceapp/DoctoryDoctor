@@ -280,7 +280,15 @@ public interface Service {
 
 
     );
+    @FormUrlEncoded
+    @POST("api/update-doctor-register")
+    Call<UserModel> switchprofile(
+            @Header("Authorization") String user_token,
+            @Field("is_emergency") String is_emergency,
+            @Field("id") String id
 
+
+    );
     @GET("api/Get-Times-By-Day")
     Call<MyTimeModel> gettimes(
             @Header("Authorization") String user_token,

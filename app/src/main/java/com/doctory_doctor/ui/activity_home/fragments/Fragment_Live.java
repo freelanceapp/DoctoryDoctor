@@ -83,6 +83,12 @@ public class Fragment_Live extends Fragment implements LiveFragmentView {
         apointmentModelList.clear();
         apointmentModelList.addAll(apointmentModel.getData());
         adapter.notifyDataSetChanged();
+        if(apointmentModelList.size()==0){
+            binding.tvNoData.setVisibility(View.VISIBLE);
+        }
+        else {
+            binding.tvNoData.setVisibility(View.GONE);
+        }
 
     }
 

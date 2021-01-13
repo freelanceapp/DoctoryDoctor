@@ -25,6 +25,7 @@ import com.doctory_doctor.models.DrugModel;
 import com.doctory_doctor.models.UserModel;
 import com.doctory_doctor.mvp.activity_patient_details_mvp.ActivityPatientDetailsPresenter;
 import com.doctory_doctor.mvp.activity_patient_details_mvp.ActivityPatientDetailsView;
+import com.doctory_doctor.ui.activity_live.LiveActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Activit
         binding.imageCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+if(type.equals("normal")){
                 intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", patientFk.getPhone_code() + patientFk.getPhone(), null));
                 if (intent != null) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -105,6 +106,11 @@ public class PatientDetailsActivity extends AppCompatActivity implements Activit
 
                 }
             }
+            else{
+                Intent intent = new Intent(PatientDetailsActivity.this, LiveActivity.class);
+                intent.putExtra("room",id);
+                startActivity(intent);
+            }}
         });
         binding.imageBack.setOnClickListener(view -> finish());
         if (patientFk == null) {

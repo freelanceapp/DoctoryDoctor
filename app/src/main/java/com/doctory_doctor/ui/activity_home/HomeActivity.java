@@ -22,6 +22,7 @@ import com.doctory_doctor.mvp.activity_home_mvp.ActivityHomePresenter;
 import com.doctory_doctor.mvp.activity_home_mvp.HomeActivityView;
 import com.doctory_doctor.ui.activity_clinic_reservation.ClinicReservationActivity;
 import com.doctory_doctor.ui.activity_login.LoginActivity;
+import com.doctory_doctor.ui.activity_notifications.NotificationActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -70,7 +71,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
             Intent intent = new Intent(this, ClinicReservationActivity.class);
             startActivity(intent);
         });
-
+        binding.flnotification.setOnClickListener(view -> {
+            Intent intent = new Intent(this, NotificationActivity.class);
+            startActivity(intent);
+        });
 
     }
 
