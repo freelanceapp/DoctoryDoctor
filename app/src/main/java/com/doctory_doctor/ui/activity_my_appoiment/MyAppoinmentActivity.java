@@ -190,14 +190,25 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
             binding.card.setVisibility(View.GONE);
         } else {
             binding.card.setVisibility(View.VISIBLE);
-
             for (int i = 0; i < daylist.size(); i++) {
+                Log.e("llslslsl",list2.indexOf(daylist.get(i).getDay_name())+""+(i+1)+list2.get(i+1)+daylist.get(i).getDay_name());
+                if(list2.indexOf(daylist.get(i).getDay_name())!=i+1){
+                    String day=list3.get(i+1);
+                    list3.set(i+1,daylist.get(i).getDay_name());
+                    list3.set(list2.indexOf(daylist.get(i).getDay_name()),day);
+                   // Log.e("llslslsl",list3.get(daylist.get(i).getDay_name())+""+(i+1)+list3.get(i+1)+daylist.get(i).getDay_name());
+
+                }}
+            Log.e(";;ll",list3.size()+"");
+            for (int i = 0; i < daylist.size(); i++) {
+
                 if (list2.contains(daylist.get(i).getDay_name())) {
 
                     list.remove(list2.indexOf(daylist.get(i).getDay_name()));
                     list2.remove(list2.indexOf(daylist.get(i).getDay_name()));
 
                 }
+
 
 
             }

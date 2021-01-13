@@ -41,6 +41,7 @@ public class MyTimeActivity extends AppCompatActivity implements MyTimeActivityV
     private ProgressDialog dialog;
     int doctortimeid;
     String day = "";
+    private int pos;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -190,7 +191,14 @@ public class MyTimeActivity extends AppCompatActivity implements MyTimeActivityV
 //        }
     }
 
-    public void remove(int id) {
+    @Override
+    public void delteucese() {
+        dataList.remove(pos);
+        myTimeAdapter.notifyItemRemoved(pos);
+    }
 
+    public void remove(int pos) {
+this.pos=pos;
+presenter.remove(dataList.get(pos).getId(),userModel);
     }
 }

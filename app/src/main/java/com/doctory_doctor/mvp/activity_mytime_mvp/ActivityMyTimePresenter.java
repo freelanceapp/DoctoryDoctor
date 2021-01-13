@@ -126,19 +126,18 @@ public class ActivityMyTimePresenter implements TimePickerDialog.OnTimeSetListen
         }
     }
 
-    public void remove(String s, UserModel userModel) {
-        List<String> list = new ArrayList<>();
-        list.add(s);
+    public void remove(int id, UserModel userModel) {
+
         view.onLoad();
         Api.getService(Tags.base_url)
-                .addday("Bearer " + userModel.getData().getToken(), userModel.getData().getId() + "", list)
+                .deltetime("Bearer " + userModel.getData().getToken(), id)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         view.onFinishload();
                         if (response.isSuccessful() && response.body() != null) {
                             //  Log.e("eeeeee", response.body().getUser().getName());
-                            view.sucese();
+                            view.delteucese();
                         } else {
                             try {
                                 Log.e("mmmmmmmmmmssss", response.errorBody().string());

@@ -62,7 +62,7 @@ myHolder.binding.flremove.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         MyTimeActivity myTimeActivity=(MyTimeActivity)context;
-        myTimeActivity.remove(list.get(position).getId());
+        myTimeActivity.remove(position);
     }
 });
 //            myHolder.binding.btnDetails.setOnClickListener(v -> {

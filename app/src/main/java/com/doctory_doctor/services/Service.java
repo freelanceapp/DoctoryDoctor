@@ -310,4 +310,10 @@ public interface Service {
             @Header("Authorization") String user_token,
             @Field("doctor_time_id") int doctor_time_id
             );
+    @FormUrlEncoded
+    @POST("api/delete-doctor-times")
+    Call<ResponseBody> deltetime(
+            @Header("Authorization") String user_token,
+            @Field("doctor_time_detail_id") int doctor_time_detail_id
+    );
 }

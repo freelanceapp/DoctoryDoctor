@@ -20,4 +20,6 @@ public interface MyTimeActivityView {
 
 
     void onDateSelected(String date, DialogAddTimeBinding binding);
+
+    void delteucese();
 }
