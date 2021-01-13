@@ -17,6 +17,7 @@ import com.doctory_doctor.databinding.LoadMoreRowBinding;
 import com.doctory_doctor.databinding.MyAppointmentRowBinding;
 import com.doctory_doctor.models.DayModel;
 import com.doctory_doctor.ui.activity_my_appoiment.MyAppoinmentActivity;
+import com.doctory_doctor.ui.activity_notifications.NotificationActivity;
 
 import java.util.List;
 
@@ -89,6 +90,15 @@ public class DayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     MyAppoinmentActivity myAppoinmentActivity=(MyAppoinmentActivity)context;
                     myAppoinmentActivity.
                             show(context,list.get(position).getId(),position);
+                }
+            });
+            myHolder.binding.fldelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(context instanceof MyAppoinmentActivity){
+                        MyAppoinmentActivity myAppoinmentActivity=(MyAppoinmentActivity)context;
+                        myAppoinmentActivity.delete(position);
+                    }
                 }
             });
             // Log.e("flkfkfk",list.get(position).getReservation_type());

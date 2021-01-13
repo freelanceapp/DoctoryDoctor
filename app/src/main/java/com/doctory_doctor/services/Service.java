@@ -304,4 +304,10 @@ public interface Service {
 
 
     );
+    @FormUrlEncoded
+    @POST("api/delete-doctor-days")
+    Call<ResponseBody> deleteday(
+            @Header("Authorization") String user_token,
+            @Field("doctor_time_id") int doctor_time_id
+            );
 }

@@ -53,6 +53,7 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
     private ActivityMyAppoimentPresenter presenter;
     private ProgressDialog dialog;
     private String from = "", to = "";
+    private int pos;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -134,6 +135,9 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
     }
 
     private void Addday() {
+        list.clear();
+        list2.clear();
+        list3.clear();
         list.add(getResources().getString(R.string.add_day));
         list.add(getResources().getString(R.string.SAT));
         list.add(getResources().getString(R.string.Sun));
@@ -177,9 +181,16 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
         daylist.clear();
         daylist.addAll(body.getData());
         dayAdapter.notifyDataSetChanged();
+        Addday();
+        change();
+    }
+
+    private void change() {
         if (list.size() - daylist.size() == 1) {
             binding.card.setVisibility(View.GONE);
         } else {
+            binding.card.setVisibility(View.VISIBLE);
+
             for (int i = 0; i < daylist.size(); i++) {
                 if (list2.contains(daylist.get(i).getDay_name())) {
 
@@ -191,7 +202,7 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
 
             }
 
-            Log.e("ldldl",daylist.size()+"");
+            Log.e("ldldl", daylist.size() + "");
             adddayAdapter.notifyDataSetChanged();
         }
     }
@@ -291,10 +302,23 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
         Toast.makeText(this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onSuccessDelete() {
+        daylist.remove(pos);
+        dayAdapter.notifyItemRemoved(pos);
+        Addday();
+        change();
+    }
+
     public void show(Context context, int id, int pos) {
         Intent intent = new Intent(MyAppoinmentActivity.this, MyTimeActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("day", list3.get(pos + 1));
         startActivity(intent);
+    }
+
+    public void delete(int position) {
+        pos = position;
+        presenter.deletday(userModel, daylist.get(position).getId());
     }
 }
