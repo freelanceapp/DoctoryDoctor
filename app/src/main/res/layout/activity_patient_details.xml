@@ -8,12 +8,17 @@
         <variable
             name="lang"
             type="String" />
+
         <variable
             name="type"
             type="String" />
+
+        <import type="android.view.View" />
+
         <variable
             name="model"
             type="com.doctory_doctor.models.UserModel.User" />
+
         <variable
             name="patinetmodel"
             type="com.doctory_doctor.models.ApointmentModel.Data.PatientFk" />
@@ -24,6 +29,7 @@
         android:layout_height="match_parent"
 
         >
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,42 +40,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    >
+                    android:layout_height="200dp">
+
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
-                        >
+                        android:layout_height="160dp">
+
                         <ImageView
                             android:id="@+id/imageBack"
                             android:layout_width="match_parent"
                             android:layout_height="160dp"
-                            android:src="@drawable/reserve_image"
                             android:scaleType="centerCrop"
-                            />
+                            android:src="@drawable/reserve_image" />
 
                     </FrameLayout>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:src="@color/colorPrimary"
                         android:alpha=".4"
-                        />
+                        android:src="@color/colorPrimary" />
 
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_margin="10dp"
-                        android:src="@drawable/ic_left_arrow"
-                        app:tint="@color/color1"
-                        android:padding="7dp"
                         android:background="@drawable/circle_white"
+                        android:padding="7dp"
                         android:rotation='@{lang.equals("ar")?180:0}'
-                        />
+                        android:src="@drawable/ic_left_arrow"
+                        app:tint="@color/color1" />
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,124 +81,125 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        >
+                        android:layout_marginEnd="20dp">
+
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/image"
+                            user_image='@{model!=null?model.logo:patinetmodel.logo}'
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:src="@drawable/image_avatar"
                             android:layout_gravity="bottom"
-                            user_image='@{model!=null?model.logo:patinetmodel.logo}'
+                            android:src="@drawable/image_avatar"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            />
+                            app:layout_constraintStart_toStartOf="parent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:layout_marginStart="8dp"
                             android:singleLine="true"
                             android:text='@{model!=null?model.name:patinetmodel.name}'
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/image"
-                            android:layout_marginStart="8dp"
-                            />
+                            app:layout_constraintStart_toEndOf="@id/image" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </FrameLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    >
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        >
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_calendar"
-                            app:tint="@color/color1"
+                            android:layout_gravity="center_vertical"
                             android:clickable="false"
                             android:longClickable="false"
-                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/color1"
 
                             />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/gray8"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
-                            android:textSize="12sp"
-                            android:text="@string/last_date"
                             android:clickable="false"
                             android:longClickable="false"
-                            android:layout_gravity="center_vertical"
-                            />
+                            android:text="@string/last_date"
+                            android:textColor="@color/gray8"
+                            android:textSize="12sp" />
+
                         <Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
 
                             />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
                             android:layout_gravity="center_vertical"
-                            android:textColor="@color/black"
                             android:text='@{model!=null?(model.last_reservation_fk!=null?(model.last_reservation_fk.date+" "+model.last_reservation_fk.time+""+model.last_reservation_fk.time_type):""):(patinetmodel.last_reservation_fk!=null?(patinetmodel.last_reservation_fk.date+" "+patinetmodel.last_reservation_fk.time+""+patinetmodel.last_reservation_fk.time_type):"")}'
-                            />
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:layout_marginTop="20dp"
+                        android:background="@drawable/small_rounded_top_primary"
                         android:orientation="horizontal"
                         android:paddingStart="8dp"
-                        android:paddingEnd="8dp"
-                        android:background="@drawable/small_rounded_top_primary"
-                        >
+                        android:paddingEnd="8dp">
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight=".7"
+                            android:text="@string/previous_drugs"
                             android:textColor="@color/white"
                             android:textSize="17sp"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/previous_drugs"
 
                             />
+
                         <Space
                             android:layout_width="1px"
                             android:layout_height="0dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            />
+                            android:layout_marginEnd="8dp" />
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight=".3"
-                            android:textColor="@color/white"
-                            android:textSize="17sp"
                             android:layout_gravity="center_vertical"
-                            android:text="@string/dose"
+                            android:layout_weight=".3"
                             android:gravity="center"
-                            />
+                            android:text="@string/dose"
+                            android:textColor="@color/white"
+                            android:textSize="17sp" />
 
                     </LinearLayout>
 
@@ -204,54 +209,56 @@
                         android:minHeight="200dp"
 
                         >
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/tvNoData"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:text="@string/no_data_to_show"
                             android:textColor="@color/black"
                             android:textSize="16sp"
-                            android:text="@string/no_data_to_show"
-                            android:visibility="gone"
-                            />
+                            android:visibility="gone" />
                     </FrameLayout>
 
 
                 </LinearLayout>
+
                 <FrameLayout
                     android:id="@+id/image_call"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@color/color1"
-                    >
+                    android:visibility='@{type==null?View.GONE:(type.equals("normal")?View.GONE:View.VISIBLE),default=gone}'>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        >
+                        android:layout_gravity="center">
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src='@{type!=null?(type.equals("normal")?@drawable/ic_phone:@drawable/ic_video_camera):@drawable/ic_video_camera}'
-                            app:tint="@color/white"
                             android:layout_gravity="center_vertical"
-                            />
+                            android:src='@{type!=null?(type.equals("normal")?@drawable/ic_phone:@drawable/ic_video_camera):@drawable/ic_video_camera}'
+                            app:tint="@color/white" />
+
                         <Space
                             android:layout_width="10dp"
-                            android:layout_height="0dp"/>
+                            android:layout_height="0dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
                             android:text='@{type!=null?(type.equals("online")?@string/video_call:@string/call):@string/call}'
-                            />
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                 </FrameLayout>
@@ -264,14 +271,13 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            />
+            android:background="@color/white" />
+
         <ProgressBar
             android:id="@+id/progBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
 
 
     </FrameLayout>

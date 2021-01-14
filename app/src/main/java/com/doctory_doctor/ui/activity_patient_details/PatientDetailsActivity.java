@@ -92,19 +92,19 @@ public class PatientDetailsActivity extends AppCompatActivity implements Activit
             @Override
             public void onClick(View v) {
 if(type.equals("normal")){
-                intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", patientFk.getPhone_code() + patientFk.getPhone(), null));
-                if (intent != null) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(PatientDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(PatientDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
-                        } else {
-                            startActivity(intent);
-                        }
-                    } else {
-                        startActivity(intent);
-                    }
-
-                }
+//                intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", patientFk.getPhone_code() + patientFk.getPhone(), null));
+//                if (intent != null) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        if (ContextCompat.checkSelfPermission(PatientDetailsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                            ActivityCompat.requestPermissions(PatientDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+//                        } else {
+//                            startActivity(intent);
+//                        }
+//                    } else {
+//                        startActivity(intent);
+//                    }
+//
+//                }
             }
             else{
                 Intent intent = new Intent(PatientDetailsActivity.this, LiveActivity.class);
