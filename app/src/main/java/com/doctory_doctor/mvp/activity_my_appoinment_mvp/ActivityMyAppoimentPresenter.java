@@ -128,9 +128,10 @@ public class ActivityMyAppoimentPresenter implements TimePickerDialog.OnTimeSetL
     }
 
     public void addday(String s, UserModel userModel) {
+        view.onLoad();
+
         List<String> list = new ArrayList<>();
         list.add(s);
-        view.onLoad();
         Api.getService(Tags.base_url)
                 .addday("Bearer " + userModel.getData().getToken(), userModel.getData().getId() + "", list)
                 .enqueue(new Callback<ResponseBody>() {

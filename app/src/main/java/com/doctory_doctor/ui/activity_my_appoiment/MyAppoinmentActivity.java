@@ -154,14 +154,15 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
         list2.add("WED");
         list2.add("THU");
         list2.add("FRI");
-        list3.add(getResources().getString(R.string.add_day));
-        list3.add(getResources().getString(R.string.SAT));
-        list3.add(getResources().getString(R.string.Sun));
-        list3.add(getResources().getString(R.string.mon));
-        list3.add(getResources().getString(R.string.Tue));
-        list3.add(getResources().getString(R.string.wed));
-        list3.add(getResources().getString(R.string.Thr));
-        list3.add(getResources().getString(R.string.fri));
+//        list3.add(getResources().getString(R.string.add_day));
+//        list3.add(getResources().getString(R.string.SAT));
+//        list3.add(getResources().getString(R.string.Sun));
+//        list3.add(getResources().getString(R.string.mon));
+//        list3.add(getResources().getString(R.string.Tue));
+//        list3.add(getResources().getString(R.string.wed));
+//        list3.add(getResources().getString(R.string.Thr));
+//        list3.add(getResources().getString(R.string.fri));
+
     }
 
 
@@ -186,34 +187,28 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
     }
 
     private void change() {
+        for (int i = 0; i < daylist.size(); i++) {
+
+            if (list2.contains(daylist.get(i).getDay_name())) {
+                list3.add(list.get(list2.indexOf(daylist.get(i).getDay_name())));
+            }
+        }
         if (list.size() - daylist.size() == 1) {
             binding.card.setVisibility(View.GONE);
         } else {
             binding.card.setVisibility(View.VISIBLE);
-            for (int i = 0; i < daylist.size(); i++) {
-                Log.e("llslslsl",list2.indexOf(daylist.get(i).getDay_name())+""+(i+1)+list2.get(i+1)+daylist.get(i).getDay_name());
-                if(list2.indexOf(daylist.get(i).getDay_name())!=i+1){
-                    String day=list3.get(i+1);
-                    list3.set(i+1,daylist.get(i).getDay_name());
-                    list3.set(list2.indexOf(daylist.get(i).getDay_name()),day);
-                   // Log.e("llslslsl",list3.get(daylist.get(i).getDay_name())+""+(i+1)+list3.get(i+1)+daylist.get(i).getDay_name());
 
-                }}
-            Log.e(";;ll",list3.size()+"");
             for (int i = 0; i < daylist.size(); i++) {
 
                 if (list2.contains(daylist.get(i).getDay_name())) {
-
                     list.remove(list2.indexOf(daylist.get(i).getDay_name()));
                     list2.remove(list2.indexOf(daylist.get(i).getDay_name()));
 
                 }
 
 
-
             }
 
-            Log.e("ldldl", daylist.size() + "");
             adddayAdapter.notifyDataSetChanged();
         }
     }
@@ -226,8 +221,12 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
 
     @Override
     public void onLoad() {
-        dialog = Common.createProgressDialog(this, getString(R.string.wait));
-        dialog.setCancelable(false);
+        if (dialog == null) {
+            dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+        } else {
+            dialog.dismiss();
+        }
         dialog.show();
     }
 
@@ -311,6 +310,7 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
     @Override
     public void suceseaddtime() {
         Toast.makeText(this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -324,7 +324,7 @@ public class MyAppoinmentActivity extends AppCompatActivity implements MyAppoime
     public void show(Context context, int id, int pos) {
         Intent intent = new Intent(MyAppoinmentActivity.this, MyTimeActivity.class);
         intent.putExtra("id", id);
-        intent.putExtra("day", list3.get(pos + 1));
+        intent.putExtra("day", list3.get(pos));
         startActivity(intent);
     }
 
