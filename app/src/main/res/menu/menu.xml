@@ -19,7 +19,7 @@
 
 
     <item android:id="@+id/patient"
-        android:title="@string/medicine"
+        android:title="@string/patients"
         android:icon="@drawable/ic_patient"
         />
 

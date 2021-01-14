@@ -172,5 +172,8 @@
     <string name="detection_price">سعر الكشف</string>
     <string name="my_appoinment">مواعيدى</string>
     <string name="suc">تم بنجاح!</string>
-
+    <string name="reserved">محجوز</string>
+    <string name="reserve_now">احجز الان</string>
+    <string name="not_available">لا يوجد مواعيد متاحه فى هذا اليوم</string>
+    <string name="patients">Patients</string>
 </resources>

@@ -172,5 +172,8 @@
     <string name="detection_price">Detection Price</string>
     <string name="my_appoinment">My Appoinment</string>
     <string name="suc">Success!</string>
-
+    <string name="not_available">Not Available</string>
+    <string name="reserved">Reserved</string>
+    <string name="reserve_now">Reserve now</string>
+    <string name="patients">Patients</string>
 </resources>

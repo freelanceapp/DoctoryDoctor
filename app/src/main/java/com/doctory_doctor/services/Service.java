@@ -13,6 +13,7 @@ import com.doctory_doctor.models.NotificationDataModel;
 import com.doctory_doctor.models.PatentDataModel;
 import com.doctory_doctor.models.PlaceGeocodeData;
 import com.doctory_doctor.models.PlaceMapDetailsData;
+import com.doctory_doctor.models.ReservisionTimeModel;
 import com.doctory_doctor.models.SettingModel;
 import com.doctory_doctor.models.UserModel;
 import com.doctory_doctor.models.UserRoomModelData;
@@ -315,5 +316,34 @@ public interface Service {
     Call<ResponseBody> deltetime(
             @Header("Authorization") String user_token,
             @Field("doctor_time_detail_id") int doctor_time_detail_id
+    );
+    @GET("api/get-doctor-reservations")
+    Call<ReservisionTimeModel> getreservision(
+            @Query("doctor_id") String doctor_id,
+            @Query("date") String date,
+            @Query("day_name") String day_name,
+            @Query("reservation_type") String reservation_type
+
+
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/add-fast-reservations")
+    Call<ResponseBody> addfastreservision(
+                                      @Field("doctor_id") String doctor_id,
+                                      @Field("date") String date,
+                                      @Field("time")String time,
+                                      @Field("cost")String cost,
+                                      @Field("reservation_type")String reservation_type,
+                                      @Field("day_name")String day_name,
+                                      @Field("time_type")String time_type,
+                                      @Field("patient_name")String patient_name,
+                                      @Field("patient_phone")String patient_phone
+
+
+
+
+
     );
 }
